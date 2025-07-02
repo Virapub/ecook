@@ -337,6 +337,55 @@ header p {
     color: #666;
 }
 
+/* Products Page Specific Styles */
+.products-header {
+    background: linear-gradient(135deg, #4a9b8c 0%, #3a7b6f 100%);
+}
+
+.category-filters {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--primary);
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.rating {
+    color: var(--accent);
+    margin: 0.5rem 0;
+}
+
+.no-products {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
 /* Products grid */
 .products {
     display: grid;
