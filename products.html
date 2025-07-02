@@ -92,6 +92,30 @@
                 });
             });
         });
-    </script>
+// Category Filter Code
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 1. Sabhi buttons se 'active' class hatao
+      filterButtons.forEach(b => b.classList.remove('active'));
+      
+      // 2. Clicked button ko 'active' karo
+      btn.classList.add('active');
+      
+      // 3. Category ke hisab se filter karo
+      const category = btn.dataset.category;
+      const products = document.querySelectorAll('.product');
+      
+      products.forEach(product => {
+        if (category === 'all' || product.dataset.category === category) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    });
+  });
+  </script>
 </body>
 </html>
