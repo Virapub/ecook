@@ -642,3 +642,15 @@ const data = {
     "Comfort"
   ]
 };
+// Mobile Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.links');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+  
+  // Icon change (bars ↔ times)
+  hamburger.innerHTML = navLinks.classList.contains('active') 
+    ? '<i class="fas fa-times"></i>' 
+    : '<i class="fas fa-bars"></i>';
+});
