@@ -75,4 +75,126 @@
     <script src="js/main.js"></script>
     <script src="js/search.js"></script>
 </body>
+
+    <script>
+        // Product Filtering Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const productList = document.getElementById('productList');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            // Generate product listings
+            function generateProducts(category = 'all') {
+                let html = '';
+                const filteredProducts = category === 'all' 
+                    ? data.products 
+                    : data.products.filter(product => product.category === category);
+                
+                filteredProducts.forEach(product => {
+                    html += `
+                        <div class="product" data-category="${product.category}">
+                            <div class="image-container">
+                                <img src="${product.image}" alt="${product.name}" loading="lazy">
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title">${product.name}</h3>
+                                <div class="price">₹${product.priceINR}</div>
+                                <div class="rating">
+                                    ${'<i class="fas fa-star"></i>'.repeat(Math.floor(product.rating))}
+                                    ${product.rating % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
+                                    <span>${product.rating}</span>
+                                </div>
+                                <a href="${product.link}" 
+                                   class="buy" 
+                                   target="_blank" 
+                                   rel="noopener nofollow sponsored">
+                                    Buy on Amazon
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+                productList.innerHTML = html || '<p class="no-products">No products found in this category</p>';
+            }
+
+            // Initialize with all products
+            generateProducts();
+
+            // Filter buttons functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    generateProducts(button.dataset.category);
+                });
+            });
+        });
+// Category Filter Code
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 1. Sabhi buttons se 'active' class hatao
+      filterButtons.forEach(b => b.classList.remove('active'));
+      
+      // 2. Clicked button ko 'active' karo
+      btn.classList.add('active');
+      
+      // 3. Category ke hisab se filter karo
+      const category = btn.dataset.category;
+      const products = document.querySelectorAll('.product');
+      
+      products.forEach(product => {
+        if (category === 'all' || product.dataset.category === category) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    });
+  });
+        const searchInput = document.getElementById('searchInput');
+  
+  // Real-time search functionality
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    
+    // Filter products from data.js
+    const results = data.products.filter(product => 
+      product.name.toLowerCase().includes(query) || 
+      product.description.toLowerCase().includes(query)
+    );
+    
+    // Display results (ye function banana padega)
+    displaySearchResults(results);
+  });
+
+  // Results dikhane ka function
+  function displaySearchResults(results) {
+    const productList = document.getElementById('productList');
+    
+    if(results.length === 0) {
+      productList.innerHTML = '<p class="no-results">No products found</p>';
+      return;
+    }
+    
+    let html = '';
+    results.forEach(product => {
+      html += `
+        <div class="product">
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          
+          <div class="price">
+  ₹${product.priceINR} / $${product.priceUSD} <!-- INR + USD -->
+</div>
+
+    
+          <a href="${product.link}" target="_blank">Buy Now</a>
+        </div>
+      `;
+    });
+    
+    productList.innerHTML = html;
+  }
+    </script>
 </html>
