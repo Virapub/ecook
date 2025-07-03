@@ -120,6 +120,45 @@
       });
     });
   });
+        const searchInput = document.getElementById('searchInput');
+  
+  // Real-time search functionality
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    
+    // Filter products from data.js
+    const results = data.products.filter(product => 
+      product.name.toLowerCase().includes(query) || 
+      product.description.toLowerCase().includes(query)
+    );
+    
+    // Display results (ye function banana padega)
+    displaySearchResults(results);
+  });
+
+  // Results dikhane ka function
+  function displaySearchResults(results) {
+    const productList = document.getElementById('productList');
+    
+    if(results.length === 0) {
+      productList.innerHTML = '<p class="no-results">No products found</p>';
+      return;
+    }
+    
+    let html = '';
+    results.forEach(product => {
+      html += `
+        <div class="product">
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>₹${product.priceINR}</p>
+          <a href="${product.link}" target="_blank">Buy Now</a>
+        </div>
+      `;
+    });
+    
+    productList.innerHTML = html;
+  }
   </script>
 </body>
 </html>
