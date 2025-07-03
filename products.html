@@ -155,7 +155,12 @@
         <div class="product">
           <img src="${product.image}" alt="${product.name}">
           <h3>${product.name}</h3>
-          <p>₹${product.priceINR}</p>
+          
+          <div class="price">
+  ₹${product.priceINR} / $${product.priceUSD} <!-- INR + USD -->
+</div>
+
+    
           <a href="${product.link}" target="_blank">Buy Now</a>
         </div>
       `;
